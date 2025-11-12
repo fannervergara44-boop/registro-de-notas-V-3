@@ -1,0 +1,250 @@
+/* ======================================================= */
+/* === 0. VARIABLES Y ESTILOS BASE ======================= */
+/* ======================================================= */
+
+/* Importamos una fuente limpia y moderna (Roboto) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    /* Paleta de Colores y Sombras */
+    --primary-color: #3b82f6; /* Azul brillante (Botones, Títulos) */
+    --secondary-color: #1e40af; /* Azul oscuro (Hover) */
+    --background-light: #f3f4f6; /* Gris muy claro (Fondo general) */
+    --surface-light: #ffffff; /* Blanco (Fondo de paneles) */
+    --text-color: #1f2937; /* Gris oscuro (Texto principal) */
+    --shadow-main: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra elegante */
+    --radius: 12px; /* Radio de borde global */
+
+    /* Colores Específicos para el Resumen */
+    --color-aprobado: #10b981; /* Verde esmeralda */
+    --color-perdido: #ef4444; /* Rojo fuerte */
+}
+
+/* Estilos generales del cuerpo */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    min-height: 100vh;
+}
+
+/* Encabezado */
+header {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--surface-light);
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Títulos de Secciones */
+h2 {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--background-light);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* ======================================================= */
+/* === 1. DISTRIBUCIÓN (DOBLE COLUMNA RESPONSIVE) ======== */
+/* ======================================================= */
+
+main {
+    width: 90%;
+    max-width: 1000px; /* Ancho máximo para la vista de doble columna */
+    margin: 30px auto;
+    padding: 0;
+}
+
+/* CONTENEDOR FLEXBOX PARA EL FORMULARIO Y EL RESUMEN */
+#top-flex-container { 
+    display: flex;
+    gap: 30px; /* Espacio entre las columnas */
+    margin-bottom: 30px; /* Separación con la lista inferior */
+    align-items: stretch; /* Hace que las columnas tengan la misma altura */
+}
+
+/* Estilo de panel aplicado a todas las secciones relevantes */
+#form-section, #summary-section, #list-section {
+    background-color: var(--surface-light);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-main);
+}
+
+/* La columna del formulario (ocupa 2/3) */
+#form-section {
+    flex: 2; 
+    min-width: 350px;
+}
+
+/* La columna del contador/resumen (ocupa 1/3) */
+#summary-section {
+    flex: 1; 
+    min-width: 250px;
+}
+
+/* Estilo del contenido del contador */
+#resumen-notas p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+
+/* Diseño Responsive: Apilar las columnas en móviles */
+@media (max-width: 768px) {
+    #top-flex-container {
+        flex-direction: column; /* Apila las columnas */
+        gap: 20px;
+    }
+
+    /* Las secciones vuelven a tomar el ancho completo */
+    #form-section, #summary-section {
+        flex: none; 
+        width: 100%;
+        min-width: auto;
+    }
+    
+    main {
+        width: 95%; /* Ocupa más ancho en móviles */
+    }
+}
+
+
+/* ======================================================= */
+/* === 2. ESTILOS DE FORMULARIO Y BOTONES (Alineación) === */
+/* ======================================================= */
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+input[type="text"], 
+input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box; 
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus, 
+input[type="number"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); 
+    outline: none;
+}
+
+/* Contenedor CLAVE: Alinea los dos botones lado a lado */
+#form-buttons {
+    display: flex; /* Activa la alineación lado a lado */
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px;
+}
+
+/* Estilo Base para AMBOS botones */
+#form-buttons button, 
+button[type="submit"] { /* Incluye el botón si no está en #form-buttons */
+    width: 100%; /* Por defecto, ocupa todo el ancho */
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 10px; 
+    color: white; 
+}
+
+/* Ajuste para los botones DENTRO del contenedor de doble botón */
+#form-buttons button {
+    width: 50%; /* Divide el ancho si están lado a lado */
+    margin-top: 0;
+}
+
+/* Estilo del botón Guardar (Color principal) */
+button[type="submit"] {
+    background-color: var(--primary-color);
+}
+
+button[type="submit"]:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo del botón Limpiar (Mismo diseño, color gris diferente) */
+#limpiar-btn {
+    background-color: #9ca3af; /* Gris */
+}
+
+#limpiar-btn:hover {
+    background-color: #6b7280; /* Gris más oscuro al pasar el ratón */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Efecto de presionado general */
+button:active {
+    transform: scale(0.98); 
+}
+
+/* ======================================================= */
+/* === 4. ESTILOS DE LISTA DE NOTAS ====================== */
+/* ======================================================= */
+
+#lista-notas {
+    list-style: none;
+    padding: 0;
+}
+
+#lista-notas li {
+    background-color: var(--background-light);
+    border: 1px solid #e5e7eb;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.05rem;
+}
+
+/* Estilo del botón de eliminar */
+#lista-notas button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-perdido); /* Rojo para el ícono de basura */
+    font-size: 1.2em;
+    padding: 0;
+    transition: transform 0.1s;
+}
+
+#lista-notas button:hover {
+    transform: scale(1.1);
+}

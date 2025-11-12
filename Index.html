@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Toma de Notas</title>
+    <link rel="stylesheet" href="estiloBeta.css"> 
+</head>
+<body>
+    <header>
+        <h1>✍️ Sistema de Captura de Notas de Usuarios</h1>
+    </header>
+    
+    <main>
+        <div id="top-flex-container">
+            
+            <section id="form-section">
+                <h2>Ingresar Nueva Nota</h2>
+                <form id="nota-form">
+                    <div>
+                        <label for="documento">Documento (TI/CC):</label>
+                       <input type="text" id="documento" required aria-required="true" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+ 
+
+                    </div>
+
+                    <div>
+                        <label for="nombre">Nombre Completo:</label>
+                        <input type="text" id="nombre" required aria-required oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"> 
+                    </div>
+
+                    <div>
+                        <label for="nota">Nota (0.0 a 5.0):</label>
+                        <input type="number" id="nota" step="0.1" min="0.0" max="5.0" required>
+                    </div>
+
+                    <div id="form-buttons">
+                        <button type="submit">Guardar Nota</button>
+                        <button type="button" id="limpiar-btn">❌ Limpiar Datos</button>
+                    </div>
+                </form>
+            </section>
+            
+            <section id="summary-section">
+                <h2>Resumen de Notas</h2>
+                <div id="resumen-notas" style="padding: 15px; background-color: #e0f2fe; border: 1px solid #bae6fd; border-radius: 8px;">
+                    <p> <strong>Total de Notas:</strong> <span id="total-notas">0</span></p>
+                    <p style="color: var(--color-aprobado);">✅ <strong>Notas Aprobadas (≥ 3.0):</strong> <span id="notas-aprobadas">0</span></p>
+                    <p style="color: var(--color-perdido);">❌ <strong>Notas Perdidas (< 3.0):</strong> <span id="notas-perdidas">0</span></p>
+                </div>
+            </section>
+            
+        </div>
+        <section id="list-section">
+            <h2>Lista de Notas Capturadas</h2>
+            <ul id="lista-notas">
+                </ul>
+        </section>
+        
+    </main>
+  
+    <script type="module" src="prose.js"></script>
+</body>
+</html>
